@@ -19,8 +19,11 @@ public interface VehicleTypeRepository extends JpaRepository<VehicleType, Long> 
 	@Query(value = "select v from VehicleType v order by v.id desc ")
 	Page<VehicleType> findAllVehiculeType(Pageable pageable);
 	
-	@Query("SELECT v FROM VehicleType v WHERE v.isActive = true")
-	List<VehicleType> findAllActive();
+//	@Query(value = "select v from VehicleType v WHERE v.is_active = true order by v.id desc ")
+//	Page<VehicleType> findAllActiveVehiculeType(Pageable pageable);
+	
+//	@Query("SELECT v FROM VehicleType v WHERE v.isActive = true")
+//	List<VehicleType> findAllActive();
 
 	//JPQL query
 	@Query(value = "select v from VehicleType v where v.name = :name")
