@@ -18,6 +18,7 @@ public class VehicleTypeDto {
 	private Long id;
 	private String name;
 	private String description;
+	private String photo;
 	private Boolean isActive;
 	private LocalDate creationDate;
 	
@@ -30,6 +31,7 @@ public class VehicleTypeDto {
 				.id(vehicleType.getId())
 				.name(vehicleType.getName())
 				.description(vehicleType.getDescription())
+				.photo(vehicleType.getPhoto())
 				.isActive(vehicleType.getIsActive())
 				.creationDate(vehicleType.getCreationDate())
 				.build();
@@ -44,6 +46,7 @@ public class VehicleTypeDto {
 		vehicleTypes.setId(vehicleTypeDto.getId());
 		vehicleTypes.setName(vehicleTypeDto.getName());
 		vehicleTypes.setDescription(vehicleTypeDto.getDescription());
+		vehicleTypes.setPhoto(vehicleTypeDto.getPhoto());
 		vehicleTypes.setIsActive(vehicleTypeDto.getIsActive());
 		vehicleTypes.setCreationDate(vehicleTypeDto.getCreationDate());
 		

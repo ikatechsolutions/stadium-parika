@@ -22,6 +22,9 @@ public class VehicleType extends AbstractEntity {
 	@Column(name = "description", nullable = true)
 	private String description;
 	
+	@Column(name = "photo", nullable = false)
+	private String photo;
+	
 	@Column(name = "is_active", nullable = false)
 	private Boolean isActive = true;
 	

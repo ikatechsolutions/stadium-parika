@@ -1,14 +1,22 @@
 package com.stadium_parika.services.impl;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.stadium_parika.dto.VehicleTypeDto;
 import com.stadium_parika.exceptions.EntityNotFoundException;
@@ -33,7 +41,13 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	}
 
 	@Override
-	public VehicleTypeDto save(VehicleTypeDto dto) {
+	public VehicleTypeDto save(VehicleTypeDto dto, MultipartFile photo) {
+		
+		if(photo != null && !photo.isEmpty()) {
+	        String fileName = saveVehicleTypePhoto(photo);
+	        dto.setPhoto(fileName);
+	    }
+		
 		List<String> errors = VehicleTypeValidator.validate(dto);
 		if (!errors.isEmpty()) {
 			log.error("Vehicle type is not valid {}", dto);
@@ -45,6 +59,8 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 				throw new InvalidEntityException("Un autre type de vehicule avec le meme nom existe deja", ErrorCodes.VEHICLETYPE_ALREADY_EXISTS,
 						Collections.singletonList("Un autre type de vehicule avec le meme nom existe deja dans la BDD"));
 			}
+			dto.setIsActive(true);
+			dto.setCreationDate(LocalDate.now());
 			return VehicleTypeDto.fromEntity(
 					vehicleTypeRepository.save(VehicleTypeDto.toEntity(dto))
 			);
@@ -67,6 +83,33 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	private boolean vehicleTypeAlreadyExists(String name) {
 		Optional<VehicleType> vehicleType = vehicleTypeRepository.findVehicleTypeByName(name);
 		return vehicleType.isPresent();
+	}
+	
+	// Upload image function
+	private String saveVehicleTypePhoto(MultipartFile file) {
+
+	    try {
+
+	        String uploadDir = "uploads/vehicle-types/";
+
+	        File directory = new File(uploadDir);
+
+	        if (!directory.exists()) {
+	            directory.mkdirs();
+	        }
+
+	        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+	        Path filePath = Paths.get(uploadDir + fileName);
+
+	        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+	        return fileName;
+
+	    } catch (Exception e) {
+	        log.error("Erreur lors de l'upload de la photo", e);
+	        throw new RuntimeException("Erreur lors de l'upload de l'image");
+	    }
 	}
 
 	@Override
