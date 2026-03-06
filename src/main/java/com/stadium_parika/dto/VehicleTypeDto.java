@@ -2,6 +2,8 @@ package com.stadium_parika.dto;
 
 import java.time.LocalDate;
 
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.stadium_parika.model.VehicleType;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +33,12 @@ public class VehicleTypeDto {
 				.id(vehicleType.getId())
 				.name(vehicleType.getName())
 				.description(vehicleType.getDescription())
-				.photo(vehicleType.getPhoto())
+				.photo(
+					ServletUriComponentsBuilder
+					.fromCurrentContextPath()
+					.path("/" + vehicleType.getPhoto())
+					.toUriString()
+				)
 				.isActive(vehicleType.getIsActive())
 				.creationDate(vehicleType.getCreationDate())
 				.build();

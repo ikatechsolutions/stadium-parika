@@ -104,7 +104,7 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 
 	        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-	        return fileName;
+	        return uploadDir + fileName;
 
 	    } catch (Exception e) {
 	        log.error("Erreur lors de l'upload de la photo", e);
