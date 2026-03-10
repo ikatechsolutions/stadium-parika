@@ -23,7 +23,7 @@ public class Parking extends AbstractEntity {
 	private String location;
 	
 	@Column(name = "capacity")
-	private Long capacity;
+	private Integer capacity;
 	
 	@Column(name = "has_slots", nullable = true)
 	private Boolean has_slots;
