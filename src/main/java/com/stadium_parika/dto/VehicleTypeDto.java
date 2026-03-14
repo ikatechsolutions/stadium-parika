@@ -1,6 +1,6 @@
 package com.stadium_parika.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,7 +22,7 @@ public class VehicleTypeDto {
 	private String description;
 	private String photo;
 	private Boolean isActive;
-	private LocalDate creationDate;
+	private LocalDateTime creationDate;
 	
 	public static VehicleTypeDto fromEntity(VehicleType vehicleType) {
 		if (vehicleType == null) {

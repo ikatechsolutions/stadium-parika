@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +61,7 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 						Collections.singletonList("Un autre type de vehicule avec le meme nom existe deja dans la BDD"));
 			}
 			dto.setIsActive(true);
-			dto.setCreationDate(LocalDate.now());
+			dto.setCreationDate(LocalDateTime.now());
 			return VehicleTypeDto.fromEntity(
 					vehicleTypeRepository.save(VehicleTypeDto.toEntity(dto))
 			);

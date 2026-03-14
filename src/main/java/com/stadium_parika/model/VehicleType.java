@@ -1,6 +1,6 @@
 package com.stadium_parika.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,5 +29,5 @@ public class VehicleType extends AbstractEntity {
 	private Boolean isActive = true;
 	
 	@Column(name = "created_at",nullable = false, updatable = false)
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
 }
