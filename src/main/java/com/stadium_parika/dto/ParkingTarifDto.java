@@ -45,21 +45,21 @@ public class ParkingTarifDto {
 				
 	}
 	
-	public static ParkingTarif toEntity(ParkingTarifDto parkingTarifDto) {
-		if (parkingTarifDto == null) {
-			return null;
-		}
-		
-		ParkingTarif parkingTarifs = new ParkingTarif();
-		parkingTarifs.setId(parkingTarifDto.getId());
-		parkingTarifs.setParking(ParkingDto.toEntity(parkingTarifDto.getParking()));
-		parkingTarifs.setVehicleType(VehicleTypeDto.toEntity(parkingTarifDto.getVehicleType()));
-		parkingTarifs.setPrice(parkingTarifDto.getPrice());
-		parkingTarifs.setIs_active(parkingTarifDto.getIs_active());
-		parkingTarifs.setMin_minutes(parkingTarifDto.getMinMinutes());
-		parkingTarifs.setMax_minutes(parkingTarifDto.getMaxMinutes());
-		parkingTarifs.setCreatedDate(parkingTarifDto.getCreatedDate());
-		
-		return parkingTarifs;
-	}
+//	public static ParkingTarif toEntity(ParkingTarifDto parkingTarifDto) {
+//		if (parkingTarifDto == null) {
+//			return null;
+//		}
+//		
+//		ParkingTarif parkingTarifs = new ParkingTarif();
+//		parkingTarifs.setId(parkingTarifDto.getId());
+//		parkingTarifs.setParking(ParkingDto.toEntity(parkingTarifDto.getParking()));
+//		parkingTarifs.setVehicleType(VehicleTypeDto.toEntity(parkingTarifDto.getVehicleType()));
+//		parkingTarifs.setPrice(parkingTarifDto.getPrice());
+//		parkingTarifs.setIs_active(parkingTarifDto.getIs_active());
+//		parkingTarifs.setMin_minutes(parkingTarifDto.getMinMinutes());
+//		parkingTarifs.setMax_minutes(parkingTarifDto.getMaxMinutes());
+//		parkingTarifs.setCreatedDate(parkingTarifDto.getCreatedDate());
+//		
+//		return parkingTarifs;
+//	}
 }

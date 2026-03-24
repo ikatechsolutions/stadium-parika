@@ -197,7 +197,7 @@ public class ParkingServiceImpl implements ParkingService {
 		return parkingRepository.findById(id)
 				.map(ParkingDto::fromEntity)
 				.orElseThrow(()->new EntityNotFoundException(
-						"Aucun parking avec l'ID = " +id+ " n'a ete trouve dans la BDD ", 
+						"Aucun parking avec l'ID = " +id+ " n'a ete trouve dans la BDD", 
 						ErrorCodes.PARKING_NOT_VALID)
 						);
 	}
