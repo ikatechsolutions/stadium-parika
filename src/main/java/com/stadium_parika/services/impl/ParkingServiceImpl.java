@@ -166,7 +166,7 @@ public class ParkingServiceImpl implements ParkingService {
 
 	        ParkingSlot slot = new ParkingSlot();
 	        slot.setParking(parking);
-	        slot.setSlot_code(slotCode);;
+	        slot.setSlotCode(slotCode);;
 	        slot.setStatus(ParkingSlotStatusEnum.AVAILABLE);
 	        slot.setCreationDate(LocalDate.now());
 

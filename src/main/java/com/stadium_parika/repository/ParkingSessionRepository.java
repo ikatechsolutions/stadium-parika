@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.stadium_parika.model.ParkingSession;
+import com.stadium_parika.model.ParkingSessionStatusEnum;
 
 public interface ParkingSessionRepository extends JpaRepository<ParkingSession, Long> {
 	
@@ -25,4 +26,9 @@ public interface ParkingSessionRepository extends JpaRepository<ParkingSession, 
 	Page<ParkingSession> findByParkingSessionPlateNumberLike(String search, Pageable pageable);
 	
 	boolean existsByParkingId(Long parkingId);
+	
+	long countByParkingIdAndStatus(Long parkingId, ParkingSessionStatusEnum status);
+	
+	@Query("SELECT ps FROM ParkingSession ps WHERE ps.plateNumber = :plate_number AND ps.status = 'ONGOING'")
+	Optional<ParkingSession> findActiveSessionByPlateNumber(@Param("plate_number") String plateNumber);
 }

@@ -38,7 +38,7 @@ public interface ParkingTarifRepository extends JpaRepository<ParkingTarif, Long
     @Query("SELECT t FROM ParkingTarif t " +
     	       "WHERE t.parking.id = :parkingId " +
     	       "AND t.vehicleType.id = :vehicleTypeId " +
-    	       "AND (:min <= t.max_minutes AND :max >= t.min_minutes)")
+    	       "AND (:min <= t.maxMinutes AND :max >= t.minMinutes)")
 	List<ParkingTarif> findOverlappingTarifs(
 	        @Param("parkingId") Long parkingId,
 	        @Param("vehicleTypeId") Long vehicleTypeId,
@@ -51,8 +51,8 @@ public interface ParkingTarifRepository extends JpaRepository<ParkingTarif, Long
     @Query("UPDATE ParkingTarif t SET t.is_active = false " +
            "WHERE t.parking.id = :parkingId " +
            "AND t.vehicleType.id = :vehicleTypeId " +
-           "AND t.min_minutes = :min " +
-           "AND t.max_minutes = :max " +
+           "AND t.minMinutes = :min " +
+           "AND t.maxMinutes = :max " +
            "AND (:id IS NULL OR t.id <> :id)")
     void deactivateExistingTarifs(
             @Param("parkingId") Long parkingId,
@@ -61,4 +61,16 @@ public interface ParkingTarifRepository extends JpaRepository<ParkingTarif, Long
             @Param("max") Integer max,
             @Param("id") Long id
     );
+    
+    @Query("SELECT t FROM ParkingTarif t " +
+    	       "WHERE t.parking.id = :parkingId " +
+    	       "AND t.vehicleType.id = :vehicleTypeId " +
+    	       "AND t.is_active = true " +
+    	       "AND t.minMinutes <= :duration " +
+    	       "ORDER BY t.maxMinutes DESC")
+	List<ParkingTarif> findTarifsForDuration(
+	        @Param("parkingId") Long parkingId,
+	        @Param("vehicleTypeId") Long vehicleTypeId,
+	        @Param("duration") Integer duration
+	);
 }

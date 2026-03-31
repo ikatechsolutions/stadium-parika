@@ -103,8 +103,8 @@ public class ParkingTarifServiceImpl implements ParkingTarifService {
 	    // Mise à jour des champs
 	    parkingTarif.setParking(parking);
 	    parkingTarif.setVehicleType(vehicleType);
-	    parkingTarif.setMin_minutes(dto.getMinMinutes());
-	    parkingTarif.setMax_minutes(dto.getMaxMinutes());
+	    parkingTarif.setMinMinutes(dto.getMinMinutes());
+	    parkingTarif.setMaxMinutes(dto.getMaxMinutes());
 	    parkingTarif.setPrice(dto.getPrice());
 	    parkingTarif.setIs_active(true);
 	    

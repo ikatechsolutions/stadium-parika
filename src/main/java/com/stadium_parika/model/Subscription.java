@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Subscription extends AbstractEntity {
 	
 	@ManyToOne
-	@JoinColumn(name = "subscription_plans", nullable = false)
+	@JoinColumn(name = "subscription_plan_id", nullable = false)
 	private SubscriptionPlan subscriptionPlan;
 	
 	@Column(name = "plate_number", nullable = false)

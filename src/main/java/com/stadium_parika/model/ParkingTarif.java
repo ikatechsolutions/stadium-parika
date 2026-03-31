@@ -28,10 +28,10 @@ public class ParkingTarif extends AbstractEntity {
 	private VehicleType vehicleType;
 	
 	@Column(name = "min_minutes")
-	private Integer min_minutes;
+	private Integer minMinutes;
 	
 	@Column(name = "max_minutes")
-	private Integer max_minutes;
+	private Integer maxMinutes;
 	
 	@Column(name ="price")
 	private BigDecimal price;

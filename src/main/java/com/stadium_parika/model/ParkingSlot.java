@@ -25,7 +25,7 @@ public class ParkingSlot extends AbstractEntity {
 	private Parking parking;
 	
 	@Column(name = "slot_code")
-	private String slot_code;
+	private String slotCode;
 	
 	@Enumerated(EnumType.STRING)
 	private ParkingSlotStatusEnum status;
