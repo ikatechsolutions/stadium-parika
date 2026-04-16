@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import com.stadium_parika.model.Parking;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,10 +19,20 @@ import lombok.NoArgsConstructor;
 public class ParkingDto {
 	
 	private Long id;
+	
+	@NotBlank(message = "Nom obligatoire")
 	private String name;
+	
+	@NotBlank(message = "Localisation obligatoire")
 	private String location;
+	
+	@NotNull
+	@Positive(message = "Capacité doit etre > 0")
 	private Integer capacity;
+	
+	@NotNull
 	private Boolean has_slots;
+	
 	private Boolean is_active;
 	private LocalDate creationDate;
 	private LocalDate updateDate;

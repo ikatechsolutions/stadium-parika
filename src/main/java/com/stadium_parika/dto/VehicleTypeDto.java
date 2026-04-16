@@ -6,6 +6,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.stadium_parika.model.VehicleType;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +20,13 @@ import lombok.NoArgsConstructor;
 public class VehicleTypeDto {
 	
 	private Long id;
+	
+	@NotBlank(message = "Le nom est obligatoire")
 	private String name;
+	
+	@Size(max = 255)
 	private String description;
+	
 	private String photo;
 	private Boolean isActive;
 	private LocalDateTime creationDate;

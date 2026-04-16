@@ -8,7 +8,12 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +29,20 @@ public class ParkingSlot extends AbstractEntity {
 	@JoinColumn(name = "parking_id")
 	private Parking parking;
 	
+	@NotBlank(message = "Le code du slot est obligatoire")
 	@Column(name = "slot_code")
 	private String slotCode;
 	
+	@NotEmpty(message = "Le status est obligatoire")
 	@Enumerated(EnumType.STRING)
 	private ParkingSlotStatusEnum status;
 	
+	@PastOrPresent(message = "La date de création est invalide")
 	@Column(name = "created_at")
     private LocalDate creationDate;
+	
+	@PrePersist
+    public void prePersist() {
+        this.creationDate = LocalDate.now();
+    }
 }

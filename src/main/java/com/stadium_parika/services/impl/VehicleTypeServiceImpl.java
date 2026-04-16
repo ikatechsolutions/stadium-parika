@@ -44,6 +44,10 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	@Override
 	public VehicleTypeDto save(VehicleTypeDto dto, MultipartFile photo) {
 		
+		if (photo == null || photo.isEmpty()) {
+			throw new InvalidEntityException("Photo obligatoire", ErrorCodes.VEHICLETYPE_NOT_VALID);
+		}
+		
 		if(photo != null && !photo.isEmpty()) {
 	        String fileName = saveVehicleTypePhoto(photo);
 	        dto.setPhoto(fileName);
@@ -54,6 +58,7 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 			log.error("Vehicle type is not valid {}", dto);
 			throw new InvalidEntityException("Le type vehicule n'est pas valide", ErrorCodes.VEHICLETYPE_NOT_VALID, errors);
 		}
+		
 		if ((dto.getId() ==null || dto.getId().compareTo(0L) == 0)){
 
 			if(vehicleTypeAlreadyExists(dto.getName())) {
